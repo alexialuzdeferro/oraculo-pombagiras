@@ -196,13 +196,12 @@
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
             font-weight: 600;
-            color: #dc2626;
+            color: #000000;
             margin-bottom: 40px;
             letter-spacing: 3px;
             text-shadow: 
-                0 0 10px rgba(220, 38, 38, 0.8),
-                0 0 20px rgba(220, 38, 38, 0.6),
-                0 0 30px rgba(220, 38, 38, 0.4);
+                2px 2px 4px rgba(255, 255, 255, 0.8),
+                0 0 10px rgba(255, 255, 255, 0.6);
             animation: titleGlow 3s infinite ease-in-out;
             position: relative;
         }
@@ -234,15 +233,13 @@
         @keyframes titleGlow {
             0%, 100% { 
                 text-shadow: 
-                    0 0 10px rgba(220, 38, 38, 0.8),
-                    0 0 20px rgba(220, 38, 38, 0.6),
-                    0 0 30px rgba(220, 38, 38, 0.4);
+                    2px 2px 4px rgba(255, 255, 255, 0.8),
+                    0 0 10px rgba(255, 255, 255, 0.6);
             }
             50% { 
                 text-shadow: 
-                    0 0 15px rgba(220, 38, 38, 1),
-                    0 0 25px rgba(220, 38, 38, 0.8),
-                    0 0 35px rgba(220, 38, 38, 0.6);
+                    3px 3px 6px rgba(255, 255, 255, 1),
+                    0 0 15px rgba(255, 255, 255, 0.8);
             }
         }
         
@@ -307,10 +304,10 @@
             background: linear-gradient(135deg, transparent 0%, rgba(220, 38, 38, 0.1) 50%, transparent 100%);
             border: 1px solid #dc2626;
             padding: 15px 30px;
-            color: #dc2626;
+            color: #000000;
             font-size: 1rem;
             font-family: 'Cinzel', serif;
-            font-weight: 400;
+            font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.4s ease;
@@ -319,6 +316,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
         
         button::before {
@@ -360,12 +358,13 @@
         }
         
         button:hover {
-            color: #ffffff;
+            color: #000000;
             border-color: #ff4444;
             box-shadow: 
                 0 0 30px rgba(220, 38, 38, 0.6),
                 inset 0 0 20px rgba(220, 38, 38, 0.2);
             transform: translateY(-2px);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
         }
         
         button:active {
