@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌹 Oráculo das Pombagiras 🌹</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Crimson+Text:ital,wght@0,400;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
         
         * {
             margin: 0;
@@ -15,11 +15,9 @@
         
         body {
             height: 100vh;
-            background: linear-gradient(45deg, #000000, #1a0000, #000000);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
+            background: #000000;
             overflow: hidden;
-            font-family: 'Crimson Text', serif;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -28,13 +26,8 @@
             position: relative;
         }
         
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        /* Partículas flutuantes */
-        .particles {
+        /* Faíscas subindo */
+        .sparks {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,192 +37,67 @@
             z-index: 1;
         }
         
-        .particle {
+        .spark {
             position: absolute;
-            background: radial-gradient(circle, rgba(220, 20, 60, 0.8), transparent);
+            width: 2px;
+            height: 2px;
+            background: #dc2626;
             border-radius: 50%;
-            animation: float 15s infinite linear;
+            animation: sparkRise 4s infinite linear;
+            box-shadow: 0 0 6px #dc2626;
         }
         
-        @keyframes float {
+        @keyframes sparkRise {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) scale(0);
                 opacity: 0;
             }
             10% {
                 opacity: 1;
+                transform: translateY(90vh) scale(1);
             }
             90% {
                 opacity: 1;
+                transform: translateY(10vh) scale(1);
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(0vh) scale(0);
                 opacity: 0;
             }
         }
         
-        /* Fumaça de fundo */
-        .smoke-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 30%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
-            animation: smokeMove 20s infinite;
-            z-index: 0;
-        }
-        
-        @keyframes smokeMove {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            33% { transform: scale(1.1) rotate(2deg); }
-            66% { transform: scale(0.9) rotate(-2deg); }
-        }
-        
         .container {
-            background: rgba(0, 0, 0, 0.9);
-            border: 3px solid transparent;
-            background-clip: padding-box;
-            border-radius: 25px;
-            padding: 40px;
-            max-width: 600px;
-            min-height: 400px;
-            box-shadow: 
-                0 0 50px rgba(220, 20, 60, 0.5),
-                inset 0 0 50px rgba(0, 0, 0, 0.8);
-            animation: containerPulse 4s infinite ease-in-out;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #dc2626;
+            border-radius: 8px;
+            padding: 60px 40px;
+            max-width: 500px;
+            min-height: 300px;
             position: relative;
             z-index: 10;
-            backdrop-filter: blur(10px);
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, #dc143c, #8b0000, #dc143c, #8b0000);
-            background-size: 200% 200%;
-            border-radius: 25px;
-            z-index: -1;
-            animation: borderGlow 3s infinite;
-        }
-        
-        @keyframes borderGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes containerPulse {
-            0%, 100% { 
-                box-shadow: 
-                    0 0 30px rgba(220, 20, 60, 0.3),
-                    inset 0 0 30px rgba(0, 0, 0, 0.8);
-            }
-            50% { 
-                box-shadow: 
-                    0 0 60px rgba(220, 20, 60, 0.6),
-                    inset 0 0 60px rgba(0, 0, 0, 0.8);
-            }
+            backdrop-filter: blur(5px);
         }
         
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            font-weight: 800;
-            color: #000000;
-            margin-bottom: 30px;
-            text-shadow: 
-                2px 2px 0px #ffffff,
-                4px 4px 0px #cccccc,
-                6px 6px 10px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(255, 255, 255, 0.6);
-            letter-spacing: 3px;
-            animation: titleDramatic 3s infinite ease-in-out;
-            background: linear-gradient(45deg, #000000, #333333, #000000);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-        
-        h1::before {
-            content: '🌹 Oráculo das Pombagiras 🌹';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(45deg, #000000, #1a1a1a, #000000);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            z-index: 1;
-            animation: backgroundShift 4s infinite;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, rgba(255,255,255,0.3), transparent, rgba(255,255,255,0.3));
-            border-radius: 10px;
-            z-index: -1;
-            animation: glowPulse 2s infinite alternate;
-        }
-        
-        @keyframes backgroundShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes titleDramatic {
-            0%, 100% { 
-                transform: scale(1);
-                text-shadow: 
-                    2px 2px 0px #ffffff,
-                    4px 4px 0px #cccccc,
-                    6px 6px 10px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(255, 255, 255, 0.8);
-            }
-            50% { 
-                transform: scale(1.02);
-                text-shadow: 
-                    3px 3px 0px #ffffff,
-                    6px 6px 0px #cccccc,
-                    9px 9px 15px rgba(0, 0, 0, 0.7),
-                    0 0 30px rgba(255, 255, 255, 1);
-            }
-        }
-        
-        @keyframes glowPulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
+            font-size: 2rem;
+            font-weight: 300;
+            color: #dc2626;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
         }
         
         .mensagem {
-            font-size: 1.4rem;
-            font-style: italic;
-            margin: 30px 0;
-            min-height: 100px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin: 40px 0;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
             line-height: 1.6;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.8s ease;
+            transition: all 0.6s ease;
             color: #ffffff;
         }
         
@@ -238,19 +106,24 @@
             transform: translateY(0);
         }
         
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
         button {
-            background: linear-gradient(45deg, #dc143c, #8b0000);
-            border: 2px solid #dc143c;
-            padding: 15px 30px;
-            margin: 20px 10px;
-            color: white;
-            font-size: 1.1rem;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            border-radius: 15px;
+            background: transparent;
+            border: 1px solid #dc2626;
+            padding: 12px 24px;
+            color: #dc2626;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.4);
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -264,84 +137,22 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            background: #dc2626;
+            transition: left 0.3s ease;
+            z-index: -1;
         }
         
         button:hover::before {
-            left: 100%;
+            left: 0;
         }
         
         button:hover {
-            background: linear-gradient(45deg, #ff1744, #dc143c);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.6);
-            border-color: #dc143c;
+            color: #000000;
+            border-color: #dc2626;
         }
         
         button:active {
-            transform: translateY(0);
-        }
-        
-        .candles {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            animation: candleFlicker 2s infinite ease-in-out;
-            z-index: 5;
-            filter: drop-shadow(0 0 10px rgba(255, 140, 0, 0.8));
-        }
-        
-        @keyframes candleFlicker {
-            0%, 100% { 
-                opacity: 1;
-                transform: translateX(-50%) scale(1);
-            }
-            25% { 
-                opacity: 0.8;
-                transform: translateX(-50%) scale(0.98);
-            }
-            50% { 
-                opacity: 0.6;
-                transform: translateX(-50%) scale(1.02);
-            }
-            75% { 
-                opacity: 0.9;
-                transform: translateX(-50%) scale(0.99);
-            }
-        }
-        
-        .rose-petals {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2;
-        }
-        
-        .petal {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(220, 20, 60, 0.6);
-            border-radius: 50% 0;
-            animation: petalFall 8s infinite linear;
-        }
-        
-        @keyframes petalFall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            transform: scale(0.95);
         }
         
         .loading {
@@ -354,10 +165,10 @@
         }
         
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(220, 20, 60, 0.3);
-            border-top: 3px solid #dc143c;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-top: 1px solid #dc2626;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto;
@@ -372,36 +183,33 @@
         @media (max-width: 768px) {
             .container {
                 margin: 20px;
-                padding: 25px;
+                padding: 40px 30px;
                 max-width: 90vw;
             }
             
             h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
+                font-size: 1.5rem;
             }
             
             .mensagem {
-                font-size: 1.1rem;
-                min-height: 80px;
+                font-size: 1rem;
+                min-height: 60px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
             button {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-            
-            .candles {
-                font-size: 2rem;
-                bottom: 20px;
+                width: 100%;
+                max-width: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="smoke-overlay"></div>
-    <div class="particles" id="particles"></div>
-    <div class="rose-petals" id="rose-petals"></div>
+    <div class="sparks" id="sparks"></div>
     
     <div class="container">
         <h1>🌹 Oráculo das Pombagiras 🌹</h1>
@@ -411,11 +219,11 @@
         <div class="loading" id="loading">
             <div class="spinner"></div>
         </div>
-        <button onclick="novaMensagem()">Consultar Oráculo</button>
-        <button onclick="limparMensagem()">Limpar</button>
+        <div class="buttons">
+            <button onclick="novaMensagem()">Consultar</button>
+            <button onclick="limparMensagem()">Limpar</button>
+        </div>
     </div>
-    
-    <div class="candles">🕯️ 🕯️ 🕯️</div>
 
     <script>
         const mensagens = [
@@ -451,6 +259,9 @@
             mensagemEl.classList.remove('show');
             loadingEl.classList.add('show');
             
+            // Cria mais faíscas durante a consulta
+            criarFaiscas(20);
+            
             setTimeout(() => {
                 // Seleciona uma mensagem diferente da atual
                 let novaIndex;
@@ -466,12 +277,6 @@
                 mensagemEl.textContent = mensagem;
                 mensagemEl.classList.add('show');
                 
-                // Cria pétalas de rosa
-                criarPetalas();
-                
-                // Som místico (usando Web Audio API para criar um tom)
-                playMysticSound();
-                
             }, 1500);
         }
 
@@ -483,73 +288,31 @@
                 mensagemEl.textContent = "Clique no botão e receba uma mensagem sagrada das Pombagiras...";
                 mensagemEl.classList.add('show');
                 mensagemAtual = null;
-            }, 500);
+            }, 300);
         }
 
-        function criarPetalas() {
-            const container = document.getElementById('rose-petals');
+        function criarFaiscas(quantidade = 8) {
+            const container = document.getElementById('sparks');
             
-            for (let i = 0; i < 15; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDelay = Math.random() * 2 + 's';
-                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            for (let i = 0; i < quantidade; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = Math.random() * 100 + '%';
+                spark.style.animationDelay = Math.random() * 2 + 's';
+                spark.style.animationDuration = (Math.random() * 2 + 3) + 's';
                 
-                container.appendChild(petal);
+                // Varia o tamanho das faíscas
+                const size = Math.random() * 2 + 1;
+                spark.style.width = spark.style.height = size + 'px';
                 
-                // Remove a pétala após a animação
+                container.appendChild(spark);
+                
+                // Remove a faísca após a animação
                 setTimeout(() => {
-                    if (petal.parentNode) {
-                        petal.parentNode.removeChild(petal);
+                    if (spark.parentNode) {
+                        spark.parentNode.removeChild(spark);
                     }
-                }, 8000);
-            }
-        }
-
-        function criarParticulas() {
-            const container = document.getElementById('particles');
-            
-            for (let i = 0; i < 5; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                
-                container.appendChild(particle);
-                
-                // Remove a partícula após a animação
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 20000);
-            }
-        }
-
-        function playMysticSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(440, audioContext.currentTime + 0.5);
-                oscillator.frequency.exponentialRampToValueAtTime(220, audioContext.currentTime + 1);
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-                
-                oscillator.type = 'sine';
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 1);
-            } catch (e) {
-                console.log('Áudio não disponível neste navegador');
+                }, 5000);
             }
         }
 
@@ -558,9 +321,9 @@
             const mensagemEl = document.getElementById('mensagem');
             mensagemEl.classList.add('show');
             
-            // Cria partículas periodicamente
-            setInterval(criarParticulas, 3000);
-            criarParticulas(); // Primeira vez
+            // Cria faíscas periodicamente
+            setInterval(() => criarFaiscas(3), 1500);
+            criarFaiscas(5); // Primeira vez
         });
 
         // Efeito de teclado
