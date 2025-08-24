@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌹 Oráculo das Pombagiras 🌹</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Crimson+Text:ital,wght@0,400;1,600&display=swap');
         
         * {
             margin: 0;
@@ -140,20 +140,81 @@
         
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            color: #dc143c;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #000000;
             margin-bottom: 30px;
             text-shadow: 
-                0 0 10px #dc143c,
-                0 0 20px #dc143c,
-                0 0 30px #dc143c;
-            letter-spacing: 2px;
-            animation: titleFlicker 2s infinite alternate;
+                2px 2px 0px #ffffff,
+                4px 4px 0px #cccccc,
+                6px 6px 10px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.6);
+            letter-spacing: 3px;
+            animation: titleDramatic 3s infinite ease-in-out;
+            background: linear-gradient(45deg, #000000, #333333, #000000);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
         }
         
-        @keyframes titleFlicker {
-            0% { text-shadow: 0 0 10px #dc143c, 0 0 20px #dc143c, 0 0 30px #dc143c; }
-            100% { text-shadow: 0 0 5px #dc143c, 0 0 15px #dc143c, 0 0 25px #dc143c; }
+        h1::before {
+            content: '🌹 Oráculo das Pombagiras 🌹';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #000000, #1a1a1a, #000000);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1;
+            animation: backgroundShift 4s infinite;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.3), transparent, rgba(255,255,255,0.3));
+            border-radius: 10px;
+            z-index: -1;
+            animation: glowPulse 2s infinite alternate;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes titleDramatic {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 
+                    2px 2px 0px #ffffff,
+                    4px 4px 0px #cccccc,
+                    6px 6px 10px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(255, 255, 255, 0.8);
+            }
+            50% { 
+                transform: scale(1.02);
+                text-shadow: 
+                    3px 3px 0px #ffffff,
+                    6px 6px 0px #cccccc,
+                    9px 9px 15px rgba(0, 0, 0, 0.7),
+                    0 0 30px rgba(255, 255, 255, 1);
+            }
+        }
+        
+        @keyframes glowPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
         }
         
         .mensagem {
@@ -169,6 +230,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.8s ease;
+            color: #ffffff;
         }
         
         .mensagem.show {
@@ -202,7 +264,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
         
@@ -214,6 +276,7 @@
             background: linear-gradient(45deg, #ff1744, #dc143c);
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(220, 20, 60, 0.6);
+            border-color: #dc143c;
         }
         
         button:active {
@@ -314,7 +377,8 @@
             }
             
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
+                letter-spacing: 2px;
             }
             
             .mensagem {
