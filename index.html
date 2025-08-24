@@ -1,128 +1,513 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Oráculo das Pombagiras</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Oráculo das Pombagiras 🌹</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            background: linear-gradient(45deg, #000000, #1a0000, #000000);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            overflow: hidden;
+            font-family: 'Crimson Text', serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Partículas flutuantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.8), transparent);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Fumaça de fundo */
+        .smoke-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            animation: smokeMove 20s infinite;
+            z-index: 0;
+        }
+        
+        @keyframes smokeMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.1) rotate(2deg); }
+            66% { transform: scale(0.9) rotate(-2deg); }
+        }
+        
+        .container {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            min-height: 400px;
+            box-shadow: 
+                0 0 50px rgba(220, 20, 60, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.8);
+            animation: containerPulse 4s infinite ease-in-out;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #dc143c, #8b0000, #dc143c, #8b0000);
+            background-size: 200% 200%;
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s infinite;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes containerPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(220, 20, 60, 0.3),
+                    inset 0 0 30px rgba(0, 0, 0, 0.8);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 60px rgba(220, 20, 60, 0.6),
+                    inset 0 0 60px rgba(0, 0, 0, 0.8);
+            }
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #dc143c;
+            margin-bottom: 30px;
+            text-shadow: 
+                0 0 10px #dc143c,
+                0 0 20px #dc143c,
+                0 0 30px #dc143c;
+            letter-spacing: 2px;
+            animation: titleFlicker 2s infinite alternate;
+        }
+        
+        @keyframes titleFlicker {
+            0% { text-shadow: 0 0 10px #dc143c, 0 0 20px #dc143c, 0 0 30px #dc143c; }
+            100% { text-shadow: 0 0 5px #dc143c, 0 0 15px #dc143c, 0 0 25px #dc143c; }
+        }
+        
+        .mensagem {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin: 30px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .mensagem.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        button {
+            background: linear-gradient(45deg, #dc143c, #8b0000);
+            border: 2px solid #dc143c;
+            padding: 15px 30px;
+            margin: 20px 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #ff1744, #dc143c);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .candles {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            animation: candleFlicker 2s infinite ease-in-out;
+            z-index: 5;
+            filter: drop-shadow(0 0 10px rgba(255, 140, 0, 0.8));
+        }
+        
+        @keyframes candleFlicker {
+            0%, 100% { 
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            25% { 
+                opacity: 0.8;
+                transform: translateX(-50%) scale(0.98);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: translateX(-50%) scale(1.02);
+            }
+            75% { 
+                opacity: 0.9;
+                transform: translateX(-50%) scale(0.99);
+            }
+        }
+        
+        .rose-petals {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(220, 20, 60, 0.6);
+            border-radius: 50% 0;
+            animation: petalFall 8s infinite linear;
+        }
+        
+        @keyframes petalFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(220, 20, 60, 0.3);
+            border-top: 3px solid #dc143c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 25px;
+                max-width: 90vw;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .mensagem {
+                font-size: 1.1rem;
+                min-height: 80px;
+            }
+            
+            button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .candles {
+                font-size: 2rem;
+                bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1>🌹 Oráculo das Pombagiras 🌹</h1>
-    <p class="mensagem">Clique no botão e receba uma mensagem...</p>
-    <button onclick="novaMensagem()">Receber Mensagem</button>
-    <audio id="som-vela" src="sons/vela.mp3" preload="auto"></audio>
-  </div>
-  <script src="script.js"></script>
+    <div class="smoke-overlay"></div>
+    <div class="particles" id="particles"></div>
+    <div class="rose-petals" id="rose-petals"></div>
+    
+    <div class="container">
+        <h1>🌹 Oráculo das Pombagiras 🌹</h1>
+        <div class="mensagem" id="mensagem">
+            Clique no botão e receba uma mensagem sagrada das Pombagiras...
+        </div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+        </div>
+        <button onclick="novaMensagem()">Consultar Oráculo</button>
+        <button onclick="limparMensagem()">Limpar</button>
+    </div>
+    
+    <div class="candles">🕯️ 🕯️ 🕯️</div>
+
+    <script>
+        const mensagens = [
+            "Eu sou a chama que ilumina sua escuridão, filha. Permita que minha luz guie seus passos.",
+            "Na encruzilhada da vida, escolha sempre com o coração corajoso e a mente desperta.",
+            "O amor é faca de dois gumes: cura profundamente e também pode ferir. Use-o com sabedoria.",
+            "Quem me chama com fé verdadeira, jamais ficará sem resposta. Confie em mim.",
+            "Não tema a noite, pois nela dançam minhas rosas vermelhas e florescem os segredos.",
+            "Eu sou o espelho da alma: veja em mim aquilo que esconde de si mesma.",
+            "A gratidão é o vinho mais doce que ofereço aos que me respeitam e honram.",
+            "Na minha taça sagrada cabe tanto o mel da felicidade quanto o veneno da transformação.",
+            "Laroyê! Os caminhos se abrem para quem não teme enfrentar as próprias sombras.",
+            "O fogo que arde em meu peito pode tanto aquecer quanto consumir. Escolha sabiamente.",
+            "Suas lágrimas regam o jardim das possibilidades. Não as despreze, filha.",
+            "No silêncio da madrugada, sussurro aos ouvidos daqueles que me escutam com o coração.",
+            "A força feminina é como a lua: ora cresce, ora míngua, mas nunca desaparece completamente.",
+            "Quebre as correntes que você mesma forjou. A liberdade é seu direito divino.",
+            "O perfume das rosas vermelhas carrega minhas bênçãos para longe. Respire fundo.",
+            "Sua intuição é minha voz falando através de você. Aprenda a ouvi-la.",
+            "No fogo da paixão, tempero a alma dos corajosos. Você é uma delas.",
+            "A justiça que busca virá, mas no tempo certo. Tenha paciência, minha filha.",
+            "Cada cicatriz conta uma história de superação. Suas marcas são medalhas de honra.",
+            "O poder que procura já habita dentro de você. Desperte-o com amor próprio."
+        ];
+
+        let mensagemAtual = null;
+
+        function novaMensagem() {
+            const mensagemEl = document.getElementById('mensagem');
+            const loadingEl = document.getElementById('loading');
+            
+            // Mostra loading
+            mensagemEl.classList.remove('show');
+            loadingEl.classList.add('show');
+            
+            setTimeout(() => {
+                // Seleciona uma mensagem diferente da atual
+                let novaIndex;
+                do {
+                    novaIndex = Math.floor(Math.random() * mensagens.length);
+                } while (novaIndex === mensagemAtual && mensagens.length > 1);
+                
+                mensagemAtual = novaIndex;
+                const mensagem = mensagens[novaIndex];
+                
+                // Remove loading e mostra mensagem
+                loadingEl.classList.remove('show');
+                mensagemEl.textContent = mensagem;
+                mensagemEl.classList.add('show');
+                
+                // Cria pétalas de rosa
+                criarPetalas();
+                
+                // Som místico (usando Web Audio API para criar um tom)
+                playMysticSound();
+                
+            }, 1500);
+        }
+
+        function limparMensagem() {
+            const mensagemEl = document.getElementById('mensagem');
+            mensagemEl.classList.remove('show');
+            
+            setTimeout(() => {
+                mensagemEl.textContent = "Clique no botão e receba uma mensagem sagrada das Pombagiras...";
+                mensagemEl.classList.add('show');
+                mensagemAtual = null;
+            }, 500);
+        }
+
+        function criarPetalas() {
+            const container = document.getElementById('rose-petals');
+            
+            for (let i = 0; i < 15; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                
+                container.appendChild(petal);
+                
+                // Remove a pétala após a animação
+                setTimeout(() => {
+                    if (petal.parentNode) {
+                        petal.parentNode.removeChild(petal);
+                    }
+                }, 8000);
+            }
+        }
+
+        function criarParticulas() {
+            const container = document.getElementById('particles');
+            
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                container.appendChild(particle);
+                
+                // Remove a partícula após a animação
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 20000);
+            }
+        }
+
+        function playMysticSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(440, audioContext.currentTime + 0.5);
+                oscillator.frequency.exponentialRampToValueAtTime(220, audioContext.currentTime + 1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                
+                oscillator.type = 'sine';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1);
+            } catch (e) {
+                console.log('Áudio não disponível neste navegador');
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            const mensagemEl = document.getElementById('mensagem');
+            mensagemEl.classList.add('show');
+            
+            // Cria partículas periodicamente
+            setInterval(criarParticulas, 3000);
+            criarParticulas(); // Primeira vez
+        });
+
+        // Efeito de teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.code === 'Enter') {
+                e.preventDefault();
+                novaMensagem();
+            } else if (e.code === 'Escape') {
+                limparMensagem();
+            }
+        });
+    </script>
 </body>
 </html>
-
-body {
-  margin: 0;
-  height: 100vh;
-  background: black;
-  overflow: hidden;
-  font-family: 'Georgia', serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
-
-/* Fundo animado com fumaça */
-.overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url("https://i.ibb.co/gy3WSrC/smoke.gif") center/cover no-repeat;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-.container {
-  background: rgba(0,0,0,0.8);
-  border: 2px solid crimson;
-  border-radius: 20px;
-  padding: 20px;
-  max-width: 500px;
-  box-shadow: 0 0 40px crimson;
-  animation: pulsar 3s infinite;
-}
-
-@keyframes pulsar {
-  0%,100% { box-shadow: 0 0 20px crimson; }
-  50% { box-shadow: 0 0 50px darkred; }
-}
-
-h1 {
-  color: crimson;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px red;
-}
-
-button {
-  background: crimson;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 20px;
-  color: white;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 15px crimson;
-}
-
-button:hover {
-  background: darkred;
-  transform: scale(1.1);
-}
-
-.mensagem {
-  font-size: 20px;
-  margin: 20px 0;
-  min-height: 60px;
-  text-shadow: 0 0 8px crimson;
-}
-
-/* Velas piscando */
-body::after {
-  content: "🕯️ 🕯️ 🕯️";
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 40px;
-  animation: piscar 2s infinite;
-}
-
-@keyframes piscar {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-const mensagens = [
-  "Eu sou a chama que ilumina sua escuridão.",
-  "Na encruzilhada da vida, escolha com coragem.",
-  "O amor é faca de dois gumes: cura e também fere.",
-  "Quem me chama com fé, nunca fica sem resposta.",
-  "Não tema a noite, pois nela dançam minhas rosas.",
-  "Eu sou o espelho: veja em mim o que esconde de si mesma.",
-  "A gratidão é o vinho que ofereço aos que me respeitam.",
-  "Na minha taça cabe tanto o mel quanto o veneno.",
-  "Laroyê! Caminhos se abrem para quem não teme.",
-  "O fogo que arde em mim pode aquecer ou consumir."
-];
-
-function novaMensagem() {
-  const randomIndex = Math.floor(Math.random() * mensagens.length);
-  const mensagem = mensagens[randomIndex];
-  
-  document.querySelector(".mensagem").textContent = mensagem;
-
-  // Som da vela ao receber mensagem
-  const som = document.getElementById("som-vela");
-  som.currentTime = 0;
-  som.play();
-}
