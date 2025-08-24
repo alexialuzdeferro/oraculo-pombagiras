@@ -1,6 +1,6 @@
 # 🌹 Oráculo das Pombagiras 🌹
 
-![Descrição da imagem](caminho/para/imagem.jpg)
+![Descrição da imagem](https://github.com/alexialuzdeferro/oraculo-pombagiras/blob/main/undefined_Ultra-realistic_Veo3%20(1).png)
 
 
 Uma aplicação web interativa que oferece mensagens espirituais inspiradas na sabedoria das Pombagiras, entidades respeitadas nas tradições afro-brasileiras, especialmente no Candomblé e Umbanda.
