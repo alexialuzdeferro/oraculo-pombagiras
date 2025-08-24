@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Oráculo das Pombagiras</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>🌹 Oráculo das Pombagiras 🌹</h1>
+    <p class="mensagem">Clique no botão e receba uma mensagem...</p>
+    <button onclick="novaMensagem()">Receber Mensagem</button>
+    <audio id="som-vela" src="sons/vela.mp3" preload="auto"></audio>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  font-family: 'Georgia', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+/* Fundo animado com fumaça */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url("https://i.ibb.co/gy3WSrC/smoke.gif") center/cover no-repeat;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.container {
+  background: rgba(0,0,0,0.8);
+  border: 2px solid crimson;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 500px;
+  box-shadow: 0 0 40px crimson;
+  animation: pulsar 3s infinite;
+}
+
+@keyframes pulsar {
+  0%,100% { box-shadow: 0 0 20px crimson; }
+  50% { box-shadow: 0 0 50px darkred; }
+}
+
+h1 {
+  color: crimson;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px red;
+}
+
+button {
+  background: crimson;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 15px crimson;
+}
+
+button:hover {
+  background: darkred;
+  transform: scale(1.1);
+}
+
+.mensagem {
+  font-size: 20px;
+  margin: 20px 0;
+  min-height: 60px;
+  text-shadow: 0 0 8px crimson;
+}
+
+/* Velas piscando */
+body::after {
+  content: "🕯️ 🕯️ 🕯️";
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  animation: piscar 2s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+const mensagens = [
+  "Eu sou a chama que ilumina sua escuridão.",
+  "Na encruzilhada da vida, escolha com coragem.",
+  "O amor é faca de dois gumes: cura e também fere.",
+  "Quem me chama com fé, nunca fica sem resposta.",
+  "Não tema a noite, pois nela dançam minhas rosas.",
+  "Eu sou o espelho: veja em mim o que esconde de si mesma.",
+  "A gratidão é o vinho que ofereço aos que me respeitam.",
+  "Na minha taça cabe tanto o mel quanto o veneno.",
+  "Laroyê! Caminhos se abrem para quem não teme.",
+  "O fogo que arde em mim pode aquecer ou consumir."
+];
+
+function novaMensagem() {
+  const randomIndex = Math.floor(Math.random() * mensagens.length);
+  const mensagem = mensagens[randomIndex];
+  
+  document.querySelector(".mensagem").textContent = mensagem;
+
+  // Som da vela ao receber mensagem
+  const som = document.getElementById("som-vela");
+  som.currentTime = 0;
+  som.play();
+}
