@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌹 Oráculo das Pombagiras 🌹</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
         
         * {
             margin: 0;
@@ -15,9 +15,9 @@
         
         body {
             height: 100vh;
-            background: #000000;
+            background: radial-gradient(ellipse at center, #1a0000 0%, #000000 70%);
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -26,8 +26,8 @@
             position: relative;
         }
         
-        /* Faíscas subindo */
-        .sparks {
+        /* Pentagramas flutuantes de fundo */
+        .pentagrams {
             position: fixed;
             top: 0;
             left: 0;
@@ -35,70 +35,260 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            opacity: 0.1;
+        }
+        
+        .pentagram {
+            position: absolute;
+            font-size: 2rem;
+            color: #dc2626;
+            animation: floatPentagram 20s infinite linear;
+        }
+        
+        @keyframes floatPentagram {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Faíscas místicas */
+        .mystic-sparks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
         
         .spark {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 3px;
+            height: 3px;
             background: #dc2626;
             border-radius: 50%;
-            animation: sparkRise 4s infinite linear;
-            box-shadow: 0 0 6px #dc2626;
+            animation: sparkMystic 6s infinite linear;
+            box-shadow: 0 0 10px #dc2626, 0 0 20px #dc2626;
         }
         
-        @keyframes sparkRise {
+        @keyframes sparkMystic {
             0% {
-                transform: translateY(100vh) scale(0);
+                transform: translateY(100vh) scale(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
                 opacity: 1;
-                transform: translateY(90vh) scale(1);
+                transform: translateY(90vh) scale(1) rotate(36deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(50vh) scale(1.5) rotate(180deg);
             }
             90% {
-                opacity: 1;
-                transform: translateY(10vh) scale(1);
+                opacity: 0.6;
+                transform: translateY(10vh) scale(1) rotate(324deg);
             }
             100% {
-                transform: translateY(0vh) scale(0);
+                transform: translateY(-10vh) scale(0) rotate(360deg);
                 opacity: 0;
             }
         }
         
+        /* Círculos mágicos */
+        .magic-circles {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 50%;
+            animation: rotateMagic 30s infinite linear;
+            z-index: 0;
+        }
+        
+        .magic-circles::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            right: 50px;
+            bottom: 50px;
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            border-radius: 50%;
+            animation: rotateMagic 20s infinite linear reverse;
+        }
+        
+        .magic-circles::after {
+            content: '';
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            right: 100px;
+            bottom: 100px;
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            border-radius: 50%;
+            animation: rotateMagic 40s infinite linear;
+        }
+        
+        @keyframes rotateMagic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         .container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #dc2626;
-            border-radius: 8px;
-            padding: 60px 40px;
-            max-width: 500px;
-            min-height: 300px;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.95) 0%, 
+                rgba(26, 0, 0, 0.9) 50%, 
+                rgba(0, 0, 0, 0.95) 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-radius: 15px;
+            padding: 50px 40px;
+            max-width: 550px;
+            min-height: 400px;
             position: relative;
             z-index: 10;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 50px rgba(220, 38, 38, 0.3),
+                inset 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #dc2626 0%, 
+                #7f1d1d 25%, 
+                #dc2626 50%, 
+                #7f1d1d 75%, 
+                #dc2626 100%);
+            background-size: 200% 200%;
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderFlow 4s infinite;
+        }
+        
+        @keyframes borderFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
         h1 {
-            font-size: 2rem;
-            font-weight: 300;
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
             color: #dc2626;
             margin-bottom: 40px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 10px rgba(220, 38, 38, 0.8),
+                0 0 20px rgba(220, 38, 38, 0.6),
+                0 0 30px rgba(220, 38, 38, 0.4);
+            animation: titleGlow 3s infinite ease-in-out;
+            position: relative;
+        }
+        
+        h1::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #dc2626, transparent);
+            animation: lineGlow 2s infinite ease-in-out;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #dc2626, transparent);
+            animation: lineGlow 2s infinite ease-in-out reverse;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px rgba(220, 38, 38, 0.8),
+                    0 0 20px rgba(220, 38, 38, 0.6),
+                    0 0 30px rgba(220, 38, 38, 0.4);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 15px rgba(220, 38, 38, 1),
+                    0 0 25px rgba(220, 38, 38, 0.8),
+                    0 0 35px rgba(220, 38, 38, 0.6);
+            }
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.3; width: 50px; }
+            50% { opacity: 1; width: 150px; }
         }
         
         .mensagem {
-            font-size: 1.1rem;
-            font-weight: 300;
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-style: italic;
             margin: 40px 0;
-            min-height: 80px;
+            min-height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.6;
+            line-height: 1.8;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            color: #ffffff;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            color: #f5f5f5;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+        
+        .mensagem::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            color: #dc2626;
+            opacity: 0.6;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .mensagem::after {
+            content: '"';
+            position: absolute;
+            bottom: -40px;
+            right: -10px;
+            font-size: 4rem;
+            color: #dc2626;
+            opacity: 0.6;
+            font-family: 'Cinzel', serif;
         }
         
         .mensagem.show {
@@ -108,26 +298,27 @@
         
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
         }
         
         button {
-            background: transparent;
+            background: linear-gradient(135deg, transparent 0%, rgba(220, 38, 38, 0.1) 50%, transparent 100%);
             border: 1px solid #dc2626;
-            padding: 12px 24px;
+            padding: 15px 30px;
             color: #dc2626;
-            font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
             font-weight: 400;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
         }
         
         button::before {
@@ -137,27 +328,53 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: #dc2626;
-            transition: left 0.3s ease;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(220, 38, 38, 0.8), 
+                transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: rgba(220, 38, 38, 0.3);
+            border-radius: 50%;
+            transition: all 0.6s ease;
             z-index: -1;
         }
         
         button:hover::before {
-            left: 0;
+            left: 100%;
+        }
+        
+        button:hover::after {
+            width: 300px;
+            height: 300px;
         }
         
         button:hover {
-            color: #000000;
-            border-color: #dc2626;
+            color: #ffffff;
+            border-color: #ff4444;
+            box-shadow: 
+                0 0 30px rgba(220, 38, 38, 0.6),
+                inset 0 0 20px rgba(220, 38, 38, 0.2);
+            transform: translateY(-2px);
         }
         
         button:active {
-            transform: scale(0.95);
+            transform: translateY(0) scale(0.98);
         }
         
         .loading {
             display: none;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         
         .loading.show {
@@ -165,22 +382,56 @@
         }
         
         .spinner {
-            width: 20px;
-            height: 20px;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            border-top: 1px solid #dc2626;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(220, 38, 38, 0.2);
+            border-top: 2px solid #dc2626;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spinMystic 1.5s linear infinite;
             margin: 0 auto;
+            position: relative;
         }
         
-        @keyframes spin {
+        .spinner::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid transparent;
+            border-top: 1px solid #dc2626;
+            border-radius: 50%;
+            animation: spinMystic 1s linear infinite reverse;
+        }
+        
+        @keyframes spinMystic {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         
+        /* Efeito de vinheta gótica */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, 
+                transparent 0%, 
+                transparent 60%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+            z-index: 3;
+        }
+        
         /* Responsividade */
         @media (max-width: 768px) {
+            .magic-circles {
+                width: 400px;
+                height: 400px;
+            }
+            
             .container {
                 margin: 20px;
                 padding: 40px 30px;
@@ -188,12 +439,13 @@
             }
             
             h1 {
-                font-size: 1.5rem;
+                font-size: 2rem;
+                letter-spacing: 2px;
             }
             
             .mensagem {
-                font-size: 1rem;
-                min-height: 60px;
+                font-size: 1.1rem;
+                min-height: 100px;
             }
             
             .buttons {
@@ -203,50 +455,53 @@
             
             button {
                 width: 100%;
-                max-width: 200px;
+                max-width: 250px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="sparks" id="sparks"></div>
+    <div class="vignette"></div>
+    <div class="magic-circles"></div>
+    <div class="pentagrams" id="pentagrams"></div>
+    <div class="mystic-sparks" id="mystic-sparks"></div>
     
     <div class="container">
         <h1>🌹 Oráculo das Pombagiras 🌹</h1>
         <div class="mensagem" id="mensagem">
-            Clique no botão e receba uma mensagem sagrada das Pombagiras...
+            Invoque as energias ancestrais e receba a sabedoria das Pombagiras...
         </div>
         <div class="loading" id="loading">
             <div class="spinner"></div>
         </div>
         <div class="buttons">
-            <button onclick="novaMensagem()">Consultar</button>
-            <button onclick="limparMensagem()">Limpar</button>
+            <button onclick="novaMensagem()">Consultar Oráculo</button>
+            <button onclick="limparMensagem()">Purificar</button>
         </div>
     </div>
 
     <script>
         const mensagens = [
-            "Eu sou a chama que ilumina sua escuridão, filha. Permita que minha luz guie seus passos.",
-            "Na encruzilhada da vida, escolha sempre com o coração corajoso e a mente desperta.",
-            "O amor é faca de dois gumes: cura profundamente e também pode ferir. Use-o com sabedoria.",
-            "Quem me chama com fé verdadeira, jamais ficará sem resposta. Confie em mim.",
-            "Não tema a noite, pois nela dançam minhas rosas vermelhas e florescem os segredos.",
-            "Eu sou o espelho da alma: veja em mim aquilo que esconde de si mesma.",
-            "A gratidão é o vinho mais doce que ofereço aos que me respeitam e honram.",
-            "Na minha taça sagrada cabe tanto o mel da felicidade quanto o veneno da transformação.",
-            "Laroyê! Os caminhos se abrem para quem não teme enfrentar as próprias sombras.",
-            "O fogo que arde em meu peito pode tanto aquecer quanto consumir. Escolha sabiamente.",
-            "Suas lágrimas regam o jardim das possibilidades. Não as despreze, filha.",
-            "No silêncio da madrugada, sussurro aos ouvidos daqueles que me escutam com o coração.",
-            "A força feminina é como a lua: ora cresce, ora míngua, mas nunca desaparece completamente.",
-            "Quebre as correntes que você mesma forjou. A liberdade é seu direito divino.",
-            "O perfume das rosas vermelhas carrega minhas bênçãos para longe. Respire fundo.",
-            "Sua intuição é minha voz falando através de você. Aprenda a ouvi-la.",
-            "No fogo da paixão, tempero a alma dos corajosos. Você é uma delas.",
-            "A justiça que busca virá, mas no tempo certo. Tenha paciência, minha filha.",
-            "Cada cicatriz conta uma história de superação. Suas marcas são medalhas de honra.",
-            "O poder que procura já habita dentro de você. Desperte-o com amor próprio."
+            "Eu sou a chama que ilumina sua escuridão, filha. Permita que minha luz guie seus passos através das sombras da alma.",
+            "Na encruzilhada da vida, escolha sempre com o coração corajoso e a mente desperta. Os caminhos se revelam aos audazes.",
+            "O amor é faca de dois gumes: cura profundamente e também pode ferir. Use-o com sabedoria, pois é arma e bálsamo.",
+            "Quem me chama com fé verdadeira, jamais ficará sem resposta. Confie em mim, pois sou guardiã dos que me honram.",
+            "Não tema a noite, pois nela dançam minhas rosas vermelhas e florescem os segredos mais profundos da existência.",
+            "Eu sou o espelho da alma: veja em mim aquilo que esconde de si mesma. A verdade liberta, mesmo quando dói.",
+            "A gratidão é o vinho mais doce que ofereço aos que me respeitam e honram com oferendas sinceras.",
+            "Na minha taça sagrada cabe tanto o mel da felicidade quanto o veneno da transformação necessária.",
+            "Laroyê! Os caminhos se abrem para quem não teme enfrentar as próprias sombras e abraçar sua luz interior.",
+            "O fogo que arde em meu peito pode tanto aquecer quanto consumir. Escolha sabiamente como usar minha força.",
+            "Suas lágrimas regam o jardim das possibilidades. Não as despreze, filha, pois são sementes de renovação.",
+            "No silêncio da madrugada, sussurro aos ouvidos daqueles que me escutam com o coração aberto e humilde.",
+            "A força feminina é como a lua: ora cresce, ora míngua, mas nunca desaparece completamente do céu da alma.",
+            "Quebre as correntes que você mesma forjou. A liberdade é seu direito divino, conquistado com coragem.",
+            "O perfume das rosas vermelhas carrega minhas bênçãos para longe. Respire fundo e sinta minha proteção.",
+            "Sua intuição é minha voz falando através de você. Aprenda a ouvi-la, pois é o oráculo interno que nunca mente.",
+            "No fogo da paixão, tempero a alma dos corajosos. Você é uma delas, filha da chama sagrada.",
+            "A justiça que busca virá, mas no tempo certo. Tenha paciência, minha filha, pois o universo tem sua ordem.",
+            "Cada cicatriz conta uma história de superação. Suas marcas são medalhas de honra conquistadas na batalha da vida.",
+            "O poder que procura já habita dentro de você. Desperte-o com amor próprio e reconheça sua força ancestral."
         ];
 
         let mensagemAtual = null;
@@ -259,8 +514,9 @@
             mensagemEl.classList.remove('show');
             loadingEl.classList.add('show');
             
-            // Cria mais faíscas durante a consulta
-            criarFaiscas(20);
+            // Intensifica efeitos durante consulta
+            criarFaiscasMisticas(25);
+            criarPentagramas(8);
             
             setTimeout(() => {
                 // Seleciona uma mensagem diferente da atual
@@ -277,7 +533,10 @@
                 mensagemEl.textContent = mensagem;
                 mensagemEl.classList.add('show');
                 
-            }, 1500);
+                // Som místico
+                playMysticSound();
+                
+            }, 2000);
         }
 
         function limparMensagem() {
@@ -285,34 +544,87 @@
             mensagemEl.classList.remove('show');
             
             setTimeout(() => {
-                mensagemEl.textContent = "Clique no botão e receba uma mensagem sagrada das Pombagiras...";
+                mensagemEl.textContent = "Invoque as energias ancestrais e receba a sabedoria das Pombagiras...";
                 mensagemEl.classList.add('show');
                 mensagemAtual = null;
-            }, 300);
+            }, 400);
         }
 
-        function criarFaiscas(quantidade = 8) {
-            const container = document.getElementById('sparks');
+        function criarFaiscasMisticas(quantidade = 10) {
+            const container = document.getElementById('mystic-sparks');
             
             for (let i = 0; i < quantidade; i++) {
                 const spark = document.createElement('div');
                 spark.className = 'spark';
                 spark.style.left = Math.random() * 100 + '%';
-                spark.style.animationDelay = Math.random() * 2 + 's';
-                spark.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                spark.style.animationDelay = Math.random() * 3 + 's';
+                spark.style.animationDuration = (Math.random() * 3 + 4) + 's';
                 
-                // Varia o tamanho das faíscas
-                const size = Math.random() * 2 + 1;
+                // Varia o tamanho e intensidade
+                const size = Math.random() * 3 + 2;
                 spark.style.width = spark.style.height = size + 'px';
+                
+                // Algumas faíscas especiais mais brilhantes
+                if (Math.random() > 0.7) {
+                    spark.style.boxShadow = '0 0 15px #dc2626, 0 0 30px #dc2626, 0 0 45px #dc2626';
+                }
                 
                 container.appendChild(spark);
                 
-                // Remove a faísca após a animação
                 setTimeout(() => {
                     if (spark.parentNode) {
                         spark.parentNode.removeChild(spark);
                     }
-                }, 5000);
+                }, 7000);
+            }
+        }
+
+        function criarPentagramas(quantidade = 3) {
+            const container = document.getElementById('pentagrams');
+            const symbols = ['⭐', '✦', '✧', '⟡', '◊'];
+            
+            for (let i = 0; i < quantidade; i++) {
+                const pentagram = document.createElement('div');
+                pentagram.className = 'pentagram';
+                pentagram.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                pentagram.style.left = Math.random() * 100 + '%';
+                pentagram.style.animationDelay = Math.random() * 5 + 's';
+                pentagram.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                pentagram.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                
+                container.appendChild(pentagram);
+                
+                setTimeout(() => {
+                    if (pentagram.parentNode) {
+                        pentagram.parentNode.removeChild(pentagram);
+                    }
+                }, 25000);
+            }
+        }
+
+        function playMysticSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Frequências mais místicas
+                oscillator.frequency.setValueAtTime(174, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(285, audioContext.currentTime + 0.5);
+                oscillator.frequency.exponentialRampToValueAtTime(396, audioContext.currentTime + 1);
+                oscillator.frequency.exponentialRampToValueAtTime(174, audioContext.currentTime + 1.5);
+                
+                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
+                
+                oscillator.type = 'sine';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1.5);
+            } catch (e) {
+                console.log('Áudio não disponível neste navegador');
             }
         }
 
@@ -321,12 +633,16 @@
             const mensagemEl = document.getElementById('mensagem');
             mensagemEl.classList.add('show');
             
-            // Cria faíscas periodicamente
-            setInterval(() => criarFaiscas(3), 1500);
-            criarFaiscas(5); // Primeira vez
+            // Efeitos contínuos
+            setInterval(() => criarFaiscasMisticas(5), 2000);
+            setInterval(() => criarPentagramas(2), 8000);
+            
+            // Primeira execução
+            criarFaiscasMisticas(8);
+            criarPentagramas(3);
         });
 
-        // Efeito de teclado
+        // Controles de teclado
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space' || e.code === 'Enter') {
                 e.preventDefault();
